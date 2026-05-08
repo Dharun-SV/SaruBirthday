@@ -58,33 +58,35 @@ export default function WishesApp() {
 
   // const audioRef = useRef<HTMLAudioElement | null>(null)
 
-  const startBackgroundMusic = () => {
-    // try {
-    //   if (!audioRef.current) {
-    //     audioRef.current = new Audio(remoMusicUrl)
-    //     audioRef.current.loop = true
-    //     audioRef.current.volume = 0.25
-    //   }
+  // const startBackgroundMusic = () => {
+  //   // try {
+  //   //   if (!audioRef.current) {
+  //   //     audioRef.current = new Audio(remoMusicUrl)
+  //   //     audioRef.current.loop = true
+  //   //     audioRef.current.volume = 0.25
+  //   //   }
 
-    //   audioRef.current.pause()
-    //   audioRef.current.currentTime = 0
+  //   //   audioRef.current.pause()
+  //   //   audioRef.current.currentTime = 0
 
-    //   audioRef.current.play().catch(() => {
-    //     // ignore
-    //   })
-    // } catch {
-    //   // ignore
-    // }
-  }
+  //   //   audioRef.current.play().catch(() => {
+  //   //     // ignore
+  //   //   })
+  //   // } catch {
+  //   //   // ignore
+  //   // }
+  // }
 
-  const stopBackgroundMusic = () => {
-    // try {
-    //   audioRef.current?.pause()
-    // } catch {
-    //   // ignore
-    // }
-  }
+  // const stopBackgroundMusic = () => {
+  //   // try {
+  //   //   audioRef.current?.pause()
+  //   // } catch {
+  //   //   // ignore
+  //   // }
+  // }
 
+  // useEffect(() => {
+  //   if (stage === 'login') stopBackgroundMusic()
   // }, [stage])
 
   const [quoteHighlightTick, setQuoteHighlightTick] = useState(0)
@@ -168,7 +170,7 @@ export default function WishesApp() {
 
     setShowCrackers(false)
 
-    playBirthdaySong()
+    // playBirthdaySong()
 
     setTimeout(() => {
       const candles = document.querySelectorAll('.candle-flame')
@@ -179,43 +181,6 @@ export default function WishesApp() {
       setStage('final')
       setShowCrackers(true)
     }, 3400)
-  }
-
-  const playBirthdaySong = () => {
-    // const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)()
-    // const notes = [
-    //   { freq: 261.63, duration: 0.4 },
-    //   { freq: 261.63, duration: 0.4 },
-    //   { freq: 293.66, duration: 0.4 },
-    //   { freq: 261.63, duration: 0.4 },
-    //   { freq: 349.23, duration: 0.4 },
-    //   { freq: 329.63, duration: 0.8 },
-    //   { freq: 261.63, duration: 0.4 },
-    //   { freq: 261.63, duration: 0.4 },
-    //   { freq: 293.66, duration: 0.4 },
-    //   { freq: 261.63, duration: 0.4 },
-    //   { freq: 392.0, duration: 0.4 },
-    //   { freq: 349.23, duration: 0.8 },
-    // ]
-
-    // let currentTime = audioContext.currentTime
-
-    // notes.forEach((note) => {
-    //   const osc = audioContext.createOscillator()
-    //   const gain = audioContext.createGain()
-
-    //   osc.frequency.value = note.freq
-    //   osc.connect(gain)
-    //   gain.connect(audioContext.destination)
-
-    //   gain.gain.setValueAtTime(0.2, currentTime)
-    //   gain.gain.exponentialRampToValueAtTime(0.01, currentTime + note.duration)
-
-    //   osc.start(currentTime)
-    //   osc.stop(currentTime + note.duration)
-
-    //   currentTime += note.duration
-    // })
   }
 
   if (stage === 'login') {
@@ -284,7 +249,6 @@ export default function WishesApp() {
 
           <button
             onClick={() => {
-              startBackgroundMusic()
               setStage('wishes')
             }}
             className="continue-btn"
