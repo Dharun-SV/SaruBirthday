@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import './WishesApp.css'
 
-const remoMusicUrl = '/RemoMusic.mp4'
+// const remoMusicUrl = '/RemoMusic.mp4'
 
 interface Wish {
   id: number
@@ -54,40 +54,38 @@ export default function WishesApp() {
   const [dob, setDob] = useState('')
   const [loginError, setLoginError] = useState('')
   const [autoPlayStarted, setAutoPlayStarted] = useState(false)
-  const autoPlayRef = useRef(false)
+  // const autoPlayRef = useRef(false)
 
-  const audioRef = useRef<HTMLAudioElement | null>(null)
+  // const audioRef = useRef<HTMLAudioElement | null>(null)
 
   const startBackgroundMusic = () => {
-    try {
-      if (!audioRef.current) {
-        audioRef.current = new Audio(remoMusicUrl)
-        audioRef.current.loop = true
-        audioRef.current.volume = 0.25
-      }
+    // try {
+    //   if (!audioRef.current) {
+    //     audioRef.current = new Audio(remoMusicUrl)
+    //     audioRef.current.loop = true
+    //     audioRef.current.volume = 0.25
+    //   }
 
-      audioRef.current.pause()
-      audioRef.current.currentTime = 0
+    //   audioRef.current.pause()
+    //   audioRef.current.currentTime = 0
 
-      audioRef.current.play().catch(() => {
-        // ignore
-      })
-    } catch {
-      // ignore
-    }
+    //   audioRef.current.play().catch(() => {
+    //     // ignore
+    //   })
+    // } catch {
+    //   // ignore
+    // }
   }
 
   const stopBackgroundMusic = () => {
-    try {
-      audioRef.current?.pause()
-    } catch {
-      // ignore
-    }
+    // try {
+    //   audioRef.current?.pause()
+    // } catch {
+    //   // ignore
+    // }
   }
 
-  useEffect(() => {
-    if (stage === 'login') stopBackgroundMusic()
-  }, [stage])
+  // }, [stage])
 
   const [quoteHighlightTick, setQuoteHighlightTick] = useState(0)
 
@@ -123,7 +121,7 @@ export default function WishesApp() {
         setStage('login')
         setShowCrackers(false)
         setAutoPlayStarted(false)
-        autoPlayRef.current = false
+        // autoPlayRef.current = false
         setDob('')
       }, 30000) // 30 seconds
       return () => clearTimeout(timer)
@@ -184,40 +182,40 @@ export default function WishesApp() {
   }
 
   const playBirthdaySong = () => {
-    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)()
-    const notes = [
-      { freq: 261.63, duration: 0.4 },
-      { freq: 261.63, duration: 0.4 },
-      { freq: 293.66, duration: 0.4 },
-      { freq: 261.63, duration: 0.4 },
-      { freq: 349.23, duration: 0.4 },
-      { freq: 329.63, duration: 0.8 },
-      { freq: 261.63, duration: 0.4 },
-      { freq: 261.63, duration: 0.4 },
-      { freq: 293.66, duration: 0.4 },
-      { freq: 261.63, duration: 0.4 },
-      { freq: 392.0, duration: 0.4 },
-      { freq: 349.23, duration: 0.8 },
-    ]
+    // const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)()
+    // const notes = [
+    //   { freq: 261.63, duration: 0.4 },
+    //   { freq: 261.63, duration: 0.4 },
+    //   { freq: 293.66, duration: 0.4 },
+    //   { freq: 261.63, duration: 0.4 },
+    //   { freq: 349.23, duration: 0.4 },
+    //   { freq: 329.63, duration: 0.8 },
+    //   { freq: 261.63, duration: 0.4 },
+    //   { freq: 261.63, duration: 0.4 },
+    //   { freq: 293.66, duration: 0.4 },
+    //   { freq: 261.63, duration: 0.4 },
+    //   { freq: 392.0, duration: 0.4 },
+    //   { freq: 349.23, duration: 0.8 },
+    // ]
 
-    let currentTime = audioContext.currentTime
+    // let currentTime = audioContext.currentTime
 
-    notes.forEach((note) => {
-      const osc = audioContext.createOscillator()
-      const gain = audioContext.createGain()
+    // notes.forEach((note) => {
+    //   const osc = audioContext.createOscillator()
+    //   const gain = audioContext.createGain()
 
-      osc.frequency.value = note.freq
-      osc.connect(gain)
-      gain.connect(audioContext.destination)
+    //   osc.frequency.value = note.freq
+    //   osc.connect(gain)
+    //   gain.connect(audioContext.destination)
 
-      gain.gain.setValueAtTime(0.2, currentTime)
-      gain.gain.exponentialRampToValueAtTime(0.01, currentTime + note.duration)
+    //   gain.gain.setValueAtTime(0.2, currentTime)
+    //   gain.gain.exponentialRampToValueAtTime(0.01, currentTime + note.duration)
 
-      osc.start(currentTime)
-      osc.stop(currentTime + note.duration)
+    //   osc.start(currentTime)
+    //   osc.stop(currentTime + note.duration)
 
-      currentTime += note.duration
-    })
+    //   currentTime += note.duration
+    // })
   }
 
   if (stage === 'login') {
@@ -455,7 +453,7 @@ export default function WishesApp() {
             setStage('login')
             setShowCrackers(false)
             setAutoPlayStarted(false)
-            autoPlayRef.current = false
+            // autoPlayRef.current = false
             setDob('')
           }}
           className="restart-btn"
