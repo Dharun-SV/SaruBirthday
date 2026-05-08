@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './Game1.css'
 
-const emojis = ['🎂', '🎈', '🎉', '💝', '🌹', '💕', '🎁', '⭐', '🎂', '🎈', '🎉', '💝', '🌹', '💕', '🎁', '⭐']
+// Replaced emojis with ASCII placeholders for Vercel build compatibility
+const emojis = ['[CAKE]', '[BALLOON]', '[PARTY]', '[HEART2]', '[ROSE]', '[HEART]', '[GIFT]', '[STAR]', '[CAKE]', '[BALLOON]', '[PARTY]', '[HEART2]', '[ROSE]', '[HEART]', '[GIFT]', '[STAR]']
 
 interface Card {
   id: number
@@ -63,10 +64,12 @@ export default function Game1() {
 
   return (
     <div className="game1-container">
-      <Link to="/" className="back-button">← Back</Link>
-      
+      <Link to="/" className="back-button">
+        ← Back
+      </Link>
+
       <div className="game1-content">
-        <h1>🧠 Memory Game 🧠</h1>
+        <h1>Memory Game</h1>
         <p className="game-description">Find all matching pairs! You've made {moves} moves.</p>
 
         <div className="memory-grid">
@@ -87,16 +90,23 @@ export default function Game1() {
         {gameWon && (
           <div className="win-modal">
             <div className="win-content">
-              <h2>🎉 Congratulations! 🎉</h2>
+              <h2>Congratulations!</h2>
               <p>You won in {moves} moves!</p>
-              <button onClick={initializeGame} className="play-again-btn">Play Again</button>
-              <Link to="/" className="home-btn">Back to Home</Link>
+              <button onClick={initializeGame} className="play-again-btn">
+                Play Again
+              </button>
+              <Link to="/" className="home-btn">
+                Back to Home
+              </Link>
             </div>
           </div>
         )}
 
-        <button onClick={initializeGame} className="reset-btn">Reset Game</button>
+        <button onClick={initializeGame} className="reset-btn">
+          Reset Game
+        </button>
       </div>
     </div>
   )
 }
+

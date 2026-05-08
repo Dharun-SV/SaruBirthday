@@ -14,32 +14,32 @@ const triviaQuestions: Question[] = [
     id: 1,
     question: 'What is my favorite color?',
     options: ['Pink', 'Blue', 'Purple', 'Green'],
-    correct: 2
+    correct: 2,
   },
   {
     id: 2,
     question: 'What is my favorite food?',
     options: ['Pasta', 'Pizza', 'Biryani', 'Sushi'],
-    correct: 2
+    correct: 2,
   },
   {
     id: 3,
     question: 'What is my favorite movie genre?',
     options: ['Horror', 'Comedy', 'Romance', 'Action'],
-    correct: 2
+    correct: 2,
   },
   {
     id: 4,
     question: 'What is my hidden talent?',
     options: ['Singing', 'Dancing', 'Cooking', 'Magic tricks'],
-    correct: 1
+    correct: 1,
   },
   {
     id: 5,
     question: 'What do I love the most in the world?',
     options: ['Money', 'Fame', 'Family & Love', 'Chocolate'],
-    correct: 2
-  }
+    correct: 2,
+  },
 ]
 
 export default function Game2() {
@@ -78,25 +78,31 @@ export default function Game2() {
   if (showResults) {
     return (
       <div className="game2-container">
-        <Link to="/" className="back-button">← Back</Link>
+        <Link to="/" className="back-button">
+          ← Back
+        </Link>
         <div className="game2-content">
-          <h1>🎉 Quiz Complete! 🎉</h1>
+          <h1>Quiz Complete!</h1>
           <div className="results-card">
-            <h2>Your Score: {score} / {triviaQuestions.length}</h2>
+            <h2>
+              Your Score: {score} / {triviaQuestions.length}
+            </h2>
             <p className="score-percentage">{Math.round((score / triviaQuestions.length) * 100)}%</p>
-            
+
             {score === triviaQuestions.length && (
-              <p className="perfect-message">Perfect Score! You know me so well! 💕</p>
+              <p className="perfect-message">Perfect Score! You know me so well!</p>
             )}
             {score >= 3 && score < triviaQuestions.length && (
-              <p className="good-message">Great job! You know me quite well! 😊</p>
+              <p className="good-message">Great job! You know me quite well!</p>
             )}
-            {score < 3 && (
-              <p className="okay-message">Good try! Let's spend more time together! 🥰</p>
-            )}
-            
-            <button onClick={resetQuiz} className="retry-btn">Take Quiz Again</button>
-            <Link to="/" className="home-link-btn">Back to Home</Link>
+            {score < 3 && <p className="okay-message">Good try! Let's spend more time together!</p>}
+
+            <button onClick={resetQuiz} className="retry-btn">
+              Take Quiz Again
+            </button>
+            <Link to="/" className="home-link-btn">
+              Back to Home
+            </Link>
           </div>
         </div>
       </div>
@@ -107,13 +113,20 @@ export default function Game2() {
 
   return (
     <div className="game2-container">
-      <Link to="/" className="back-button">← Back</Link>
+      <Link to="/" className="back-button">
+        ← Back
+      </Link>
       <div className="game2-content">
-        <h1>❓ Birthday Trivia ❓</h1>
-        <p className="progress">Question {currentQuestion + 1} of {triviaQuestions.length}</p>
-        
+        <h1>Birthday Trivia</h1>
+        <p className="progress">
+          Question {currentQuestion + 1} of {triviaQuestions.length}
+        </p>
+
         <div className="progress-bar">
-          <div className="progress-fill" style={{ width: `${((currentQuestion + 1) / triviaQuestions.length) * 100}%` }}></div>
+          <div
+            className="progress-fill"
+            style={{ width: `${((currentQuestion + 1) / triviaQuestions.length) * 100}%` }}
+          ></div>
         </div>
 
         <div className="question-card">
@@ -137,3 +150,4 @@ export default function Game2() {
     </div>
   )
 }
+

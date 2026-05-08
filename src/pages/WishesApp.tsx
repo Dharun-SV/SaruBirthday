@@ -3,45 +3,54 @@ import './WishesApp.css'
 
 const remoMusicUrl = new URL('../Assets/Music/RemoMusic.mp4', import.meta.url).href
 
-
 interface Wish {
   id: number
   tamil: string
   english: string
 }
 
-
 const wishes: Wish[] = [
   {
     id: 1,
-    tamil: 'ஷாருமதி, என் வாழ்க்கையில் நீ வந்த நாள் முதல் ஒவ்வொரு நாளும் பிறந்த நாள்கள் போல் உணர்ந்துக்கொண்டிருக்கிறேன். உன் புன்னகை, உன் அன்பு, உன் பராமரிப்பு என்னை வாழச் செய்கிறது.',
-    english: 'Shaarumathi, since the day you came into my life, every day feels like a birthday. Your smile, your love makes me live.'
+    tamil:
+      'ஷாருமதி, சீமை நாள் உன் வாழ்க்கையில் வந்த நாளிலிருந்து, தினமும் ஒரு பிறந்தநாள் போலவே இருக்கும். உன் புன்னகை, உன் அன்பு என்னை வாழ வைக்கிறது.',
+    english:
+      'Shaarumathi, since the day you came into my life, every day feels like a birthday. Your smile, your love makes me live.',
   },
   {
     id: 2,
-    tamil: 'நீ ஒரு அழகிய உயிரினம், உன் இதயம் போல் சுத்தமான எல்லோருக்கும். நீ என் வாழ்க்கையின் ஒளி. சந்தோஷமாய் இரு, வளர்ந்து வெற்றி அடைந்து வா.',
-    english: 'You are a beautiful soul. You are the light of my life. Be happy and succeed always.'
+    tamil:
+      'நீ உன் அழகான ஆன்மா. நீ என் வாழ்க்கையின் ஒளி. எப்போதும் சந்தோஷமாகவும் வெற்றியாகவும் இரு.',
+    english:
+      'You are a beautiful soul. You are the light of my life. Be happy and succeed always.',
   },
   {
     id: 3,
-    tamil: 'ஒரு வருடம் கடந்து சென்றாலும் உன் அன்பு என்னை தாங்கி கொண்டிருக்கிறது. நீ எப்போதும் என் பக்கத்தில் இருக்கிறாய். முழுவதுமாய் சந்தோஷமாய் இரு.',
-    english: 'Your love sustains me. You are always by my side. Be completely happy.'
+    tamil:
+      'உன் காதல் எனக்கு ஆற்றல் தருகிறது. நீ எப்போதும் என் பக்கத்தில்தான் இருக்கிறாய். முழுமையாக சந்தோஷமாய் இரு.',
+    english: 'Your love sustains me. You are always by my side. Be completely happy.',
   },
   {
     id: 4,
-    tamil: 'ஷாருமதி, உன் சிரிப்பு என் சோர்வை எல்லாம் எடுத்துக்கொண்டு போய்விடுகிறது. உன் நம்பிக்கை மற்றும் அன்பு என்னை நல்ல மனிதனாக்குகிறது. உன் பிறந்த நாளில் இந்த பிரபஞ்சம் உன்னை ஆசீர்வதிக்கட்டும்.',
-    english: 'Your laughter takes away all my tiredness. Your trust makes me better. May the universe bless you forever.'
+    tamil:
+      'உன் சிரிப்பு என் சோர்வை போக்குகிறது. உன் நம்பிக்கை என்னை இன்னும் நல்லவனாக்கிறது. என்றும் உன் வாழ்வு ஆசீர்வதிக்கப்படும்.',
+    english:
+      'Your laughter takes away all my tiredness. Your trust makes me better. May the universe bless you forever.',
   },
   {
     id: 5,
-    tamil: 'என் அன்பான ஷாருமதி, உனக்கு பிறந்ததன் மூலம் இந்த உலகம் ஒரு அருமையான பெண்ணைப் பெற்றுக்கொண்டது. உன் வாழ்க்கை ஆனந்தமாய் நிறைந்திடுவதாக நான் விரும்புகிறேன். ஆயுளுக்கு நீ சந்தோஷமாய் வாழ!',
-    english: 'My dear Shaarumathi, by your birth, the world received a wonderful woman. May your life be filled with joy forever!'
-  }
+    tamil:
+      'என் அன்பே ஷாருமதி, உன் பிறப்பால் உலகம் ஒரு அருமையான மனிதனை பெற்றது. உன் வாழ்வில் எப்போதும் மகிழ்ச்சி நிறைந்திருக்கட்டும்.',
+    english:
+      'My dear Shaarumathi, by your birth, the world received a wonderful woman. May your life be filled with joy forever!',
+  },
 ]
+
+type Stage = 'login' | 'welcome' | 'wishes' | 'cake' | 'final'
 
 export default function WishesApp() {
   const [currentWish, setCurrentWish] = useState(0)
-  const [stage, setStage] = useState<'login' | 'welcome' | 'wishes' | 'cake' | 'final'>('login')
+  const [stage, setStage] = useState<Stage>('login')
   const [isSpeaking, setIsSpeaking] = useState(false)
   const [highlightedWord, setHighlightedWord] = useState('')
   const [isCuttingCake, setIsCuttingCake] = useState(false)
@@ -52,7 +61,6 @@ export default function WishesApp() {
   const [autoPlayStarted, setAutoPlayStarted] = useState(false)
   const autoPlayRef = useRef(false)
 
-  // Quote/music helpers (no voice)
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
   const startBackgroundMusic = () => {
@@ -63,13 +71,11 @@ export default function WishesApp() {
         audioRef.current.volume = 0.25
       }
 
-      // Ensure it stops old playback first
       audioRef.current.pause()
       audioRef.current.currentTime = 0
 
-      // User gesture will call this in Welcome button
       audioRef.current.play().catch(() => {
-        // Autoplay might be blocked; user can click again
+        // ignore
       })
     } catch {
       // ignore
@@ -85,40 +91,21 @@ export default function WishesApp() {
   }
 
   useEffect(() => {
-    // Stop music when leaving the flow (reset)
     if (stage === 'login') stopBackgroundMusic()
   }, [stage])
 
   const [quoteHighlightTick, setQuoteHighlightTick] = useState(0)
 
-  const welcomeQuoteWords = [
-    'உனக்கு',
-    'பல',
-    'மகிழ்ச்சி',
-    'நிறைந்த',
-    'பிறந்த',
-    'நாட்கள்',
-  ]
-
-  const finalQuoteWords = [
-    'உன்',
-    'பிறந்த',
-    'நாளில்',
-    'உன்னுடைய',
-    'வாழ்க்கை',
-    'வளம்,',
-    'அன்பு,',
-    'சந்தோஷத்தால்',
-  ]
-
-  const isWelcomeHighlight = (i: number) => stage === 'welcome' && quoteHighlightTick === i
-  const isFinalHighlight = (i: number) => stage === 'final' && quoteHighlightTick === i
-
+  const welcomeQuoteWords = ['ஷாரு', 'அன்பு', 'காதல்', 'மனம்', 'வாழ்த்து', 'ஒளி']
+  const finalQuoteWords = ['அன்பு', 'மனம்', 'வாழ்வு', 'காதல்', 'சந்தோஷம்', 'என்றும்', 'நம்மிடம்', 'நன்றி']
 
   useEffect(() => {
     if (stage === 'welcome') {
       setQuoteHighlightTick(0)
-      const t = setInterval(() => setQuoteHighlightTick((x) => (x + 1) % welcomeQuoteWords.length), 650)
+      const t = setInterval(
+        () => setQuoteHighlightTick((x) => (x + 1) % welcomeQuoteWords.length),
+        650
+      )
       return () => clearInterval(t)
     }
   }, [stage])
@@ -126,26 +113,27 @@ export default function WishesApp() {
   useEffect(() => {
     if (stage === 'final') {
       setQuoteHighlightTick(0)
-      const t = setInterval(() => setQuoteHighlightTick((x) => (x + 1) % finalQuoteWords.length), 650)
+      const t = setInterval(
+        () => setQuoteHighlightTick((x) => (x + 1) % finalQuoteWords.length),
+        650
+      )
       return () => clearInterval(t)
     }
   }, [stage])
 
-
-
-
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
     const validDob = '2002-05-10'
+
     if (dob === validDob) {
       setLoginError('')
       setStage('welcome')
     } else {
       const wrongMessages = [
-        'Oops! இந்த தேதியோடே நம்ம celebration துவங்க முடியாது! 10/05/2002 மட்டும் தர봐.',
-        'நீங்கள் சோதனை செய்யும் போது ஸ்டார் ஜாக் நுழைந்து விட்டது! சரியான தேதியை மறு முயற்சி செய்.',
-        'அருமை! இது பத்தாம் முறை முயற்சி செய்தாலுமே சரியான பிறந்த தேதி வந்துவிடுமா?',
-        'ஓ! இந்த தேதியோடே கேக் வராது, 10 மே 2002 வை போடுங்க.',
+        'Oops! Wrong birth date.',
+        'Not that date. Try again!',
+        'Close, but not right.',
+        'Try using: 10/05/2002',
       ]
       const randomIndex = Math.floor(Math.random() * wrongMessages.length)
       setLoginError(wrongMessages[randomIndex])
@@ -153,11 +141,8 @@ export default function WishesApp() {
   }
 
   const speakWish = async () => {
-    // Button is no longer needed (no voice). Keep this as a no-op to avoid changing UI structure.
     return
   }
-
-
 
   const nextWish = () => {
     setHighlightedWord('')
@@ -170,18 +155,14 @@ export default function WishesApp() {
     }
   }
 
-
-
   const cutCake = () => {
     if (isCuttingCake) return
     setIsCuttingCake(true)
 
-    // Stop crackers until final stage
     setShowCrackers(false)
 
     playBirthdaySong()
 
-    // Blow candles quickly, then cut
     setTimeout(() => {
       const candles = document.querySelectorAll('.candle-flame')
       candles.forEach((c) => c.classList.add('candle-blown'))
@@ -192,8 +173,6 @@ export default function WishesApp() {
       setShowCrackers(true)
     }, 3400)
   }
-
-
 
   const playBirthdaySong = () => {
     const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)()
@@ -214,7 +193,7 @@ export default function WishesApp() {
 
     let currentTime = audioContext.currentTime
 
-    notes.forEach(note => {
+    notes.forEach((note) => {
       const osc = audioContext.createOscillator()
       const gain = audioContext.createGain()
 
@@ -232,25 +211,26 @@ export default function WishesApp() {
     })
   }
 
-  // Login Page
   if (stage === 'login') {
     return (
       <div className="login-container">
         <div className="login-glow"></div>
         <div className="login-card">
           <div className="login-header">
-            <div className="logo-circle">🎉</div>
+            <div className="logo-circle">[LOGO]</div>
             <div>
               <h1 className="login-title">Sarumathi Birthday</h1>
               <p className="login-subtitle">May 10, 2002</p>
             </div>
           </div>
 
-          <p className="login-tagline">Welcome to your super birthday surprise. Enter your birth date to continue.</p>
+          <p className="login-tagline">
+            Welcome to your birthday surprise. Enter your birth date to continue.
+          </p>
 
           <form onSubmit={handleLogin} className="login-form">
             <div className="form-group">
-              <label htmlFor="dob">உன் பிறந்த தேதி</label>
+              <label htmlFor="dob">Enter birth date</label>
               <input
                 type="date"
                 id="dob"
@@ -262,15 +242,15 @@ export default function WishesApp() {
                 className="date-input"
               />
             </div>
+
             <button type="submit" className="login-btn">
-              enter the celebration
+              Enter
             </button>
           </form>
 
-          {loginError && (
-            <div className="toast-message">😅 {loginError}</div>
-          )}
+          {loginError && <div className="toast-message">{loginError}</div>}
           <div className="login-hint">Use your special date: 10/05/2002</div>
+
           <div className="login-bubbles">
             <span className="bubble bubble-1"></span>
             <span className="bubble bubble-2"></span>
@@ -282,22 +262,18 @@ export default function WishesApp() {
     )
   }
 
-  // Welcome Page
   if (stage === 'welcome') {
     return (
       <div className="welcome-container">
         <div className="welcome-content">
-          <h1 className="welcome-title">🎊 பிறந்த நாள் வாழ்த்துக்கள்! 🎊</h1>
-          <h2 className="welcome-name">Sarumathi 💕</h2>
+          <h1 className="welcome-title">Welcome</h1>
+          <h2 className="welcome-name">Sarumathi</h2>
 
-          
           <div className="welcome-message">
             <p className="main-wish">
-              உனக்கு பல மகிழ்ச்சி நிறைந்த பிறந்த நாட்கள் வாழ்த்துக்கள்!
+              Shaarumathi, every day feels special from the day you entered my life.
             </p>
-            <p className="sub-wish">
-              May you have many more happy returns of the day, dear Shaarumathi!
-            </p>
+            <p className="sub-wish">May you have many more happy returns of the day!</p>
           </div>
 
           <button
@@ -307,24 +283,22 @@ export default function WishesApp() {
             }}
             className="continue-btn"
           >
-            வாழ்த்துக்களை அனுபவி 💌
+            Continue
           </button>
-
         </div>
-
       </div>
     )
   }
 
-  // Wishes Page
   if (stage === 'wishes') {
     const wish = wishes[currentWish]
-
     return (
       <div className="wishes-container">
         <div className="wish-card">
-          <h1 className="name-title">ஷாருமதி 🎂</h1>
-          <p className="page-indicator">பக்கம் {currentWish + 1} / {wishes.length}</p>
+          <h1 className="name-title">Shaarumathi</h1>
+          <p className="page-indicator">
+            Wish {currentWish + 1} / {wishes.length}
+          </p>
 
           <div className="progress-bar">
             <div
@@ -348,25 +322,19 @@ export default function WishesApp() {
           </div>
 
           <div className="button-group">
-            <button
-              onClick={nextWish}
-              className="next-btn"
-            >
-              {currentWish < wishes.length - 1 ? 'அடுத்தது →' : 'கேக்கு →'}
+            <button onClick={nextWish} className="next-btn">
+              {currentWish < wishes.length - 1 ? 'Next →' : 'Finish →'}
             </button>
           </div>
-
         </div>
       </div>
     )
   }
 
-  // Cake Page with 3D Effect
   if (stage === 'cake') {
     return (
       <div className="cake-container">
         <div className="cake-3d-wrapper">
-          {/* Title on top of cake */}
           <h1 className="cake-top-title">Happy Birthday Charuu..</h1>
 
           <div className="cake-3d">
@@ -375,7 +343,6 @@ export default function WishesApp() {
             <div className="cake-layer layer-3"></div>
             <div className="cake-top-frosting"></div>
 
-            {/* Candles (24) */}
             <div className="candles-group">
               {[...Array(24)].map((_, i) => (
                 <div key={i} className="candle-3d" style={{ '--candle-index': i } as any}>
@@ -385,25 +352,25 @@ export default function WishesApp() {
               ))}
             </div>
 
-            {/* Knife (3D) */}
-            <div className={`knife-3d ${isCuttingCake ? 'knife-active' : ''}`} aria-hidden="true">
+            <div
+              className={`knife-3d ${isCuttingCake ? 'knife-active' : ''}`}
+              aria-hidden="true"
+            >
               <div className="knife-blade"></div>
               <div className="knife-handle"></div>
             </div>
           </div>
 
-          <p className="cake-subtext">🎂 Blow the candles then cut! 🎂</p>
+          <p className="cake-subtext">Blow the candles then cut!</p>
 
           <button onClick={cutCake} className="cut-cake-btn">
-            🔥 Blow & Cut
+            Blow & Cut
           </button>
         </div>
       </div>
-
     )
   }
 
-  // Final Celebration Page
   return (
     <div className="final-container">
       {showCrackers && (
@@ -411,12 +378,12 @@ export default function WishesApp() {
           <div className="crackers-container">
             {[...Array(25)].map((_, i) => (
               <div key={i} className="cracker" style={{ '--cracker-index': i } as any}>
-                {'🎆'}
+                [CRACK]
               </div>
             ))}
             {[...Array(20)].map((_, i) => (
               <div key={`star-${i}`} className="cracker star" style={{ '--cracker-index': i } as any}>
-                {'✨'}
+                [STAR]
               </div>
             ))}
           </div>
@@ -432,15 +399,14 @@ export default function WishesApp() {
       )}
 
       <div className="final-content">
-        <h1 className="sarumathi-name">ஷாருமதி 🎉</h1>
+        <h1 className="sarumathi-name">Shaarumathi</h1>
 
         <div className="final-message">
-          <h2>பிரிய ஷாருமதி,</h2>
+          <h2>Happy birthday Saru,</h2>
           <p>
-            உன் பிறந்த நாளில் உன்னுடைய வாழ்க்கை வளம், அன்பு, மற்றும் சந்தோஷத்தால் 
-            நிறைந்திருப்பதாக நான் பிரார்த்தனை செய்கிறேன்.
+            May your life be filled with joy and happiness. Wishing you all the best always.
           </p>
-          <p className="signature">💕 உன் மனம் நிறைந்த ஒருவனாக 💕</p>
+          <p className="signature">[SIGN] Shaarumathi</p>
         </div>
 
         <button
@@ -454,9 +420,10 @@ export default function WishesApp() {
           }}
           className="restart-btn"
         >
-          மீண்டும் தொடங்கு 🎂
+          Restart
         </button>
       </div>
     </div>
   )
 }
+

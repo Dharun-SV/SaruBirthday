@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './Game3.css'
 
+// Replaced emoji-based content with ASCII placeholders for Vercel build compatibility
 interface EmojiPair {
   emoji: string
   meaning: string
@@ -9,12 +10,12 @@ interface EmojiPair {
 }
 
 const emojiPairs: EmojiPair[] = [
-  { emoji: '😊', meaning: 'Your Beautiful Smile', id: 1 },
-  { emoji: '💪', meaning: 'Your Strong Personality', id: 2 },
-  { emoji: '🎨', meaning: 'Your Creative Mind', id: 3 },
-  { emoji: '🏃', meaning: 'Your Energy', id: 4 },
-  { emoji: '🦋', meaning: 'Your Grace', id: 5 },
-  { emoji: '⭐', meaning: 'You are a Star', id: 6 }
+  { emoji: '[SMILE]', meaning: 'Your Beautiful Smile', id: 1 },
+  { emoji: '[STRONG]', meaning: 'Your Strong Personality', id: 2 },
+  { emoji: '[CREATIVE]', meaning: 'Your Creative Mind', id: 3 },
+  { emoji: '[ENERGY]', meaning: 'Your Energy', id: 4 },
+  { emoji: '[GRACE]', meaning: 'Your Grace', id: 5 },
+  { emoji: '[STAR]', meaning: 'You are a Star', id: 6 },
 ]
 
 interface Tile {
@@ -34,7 +35,7 @@ export default function Game3() {
 
   const initializeGame = () => {
     const shuffled = emojiPairs.sort(() => Math.random() - 0.5)
-    setTiles(shuffled.map(pair => ({ ...pair, flipped: false })))
+    setTiles(shuffled.map((pair) => ({ ...pair, flipped: false })))
     setScore(0)
     setGameComplete(false)
   }
@@ -44,14 +45,14 @@ export default function Game3() {
     newTiles[index].flipped = !newTiles[index].flipped
     setTiles(newTiles)
 
-    const flippedCount = newTiles.filter(t => t.flipped).length
+    const flippedCount = newTiles.filter((t) => t.flipped).length
     if (flippedCount === newTiles.length) {
       setScore(score + 1)
       if (score + 1 === 3) {
         setGameComplete(true)
       } else {
         setTimeout(() => {
-          newTiles.forEach(t => t.flipped = false)
+          newTiles.forEach((t) => (t.flipped = false))
           setTiles([...newTiles].sort(() => Math.random() - 0.5))
         }, 1000)
       }
@@ -60,9 +61,11 @@ export default function Game3() {
 
   return (
     <div className="game3-container">
-      <Link to="/" className="back-button">← Back</Link>
+      <Link to="/" className="back-button">
+        ← Back
+      </Link>
       <div className="game3-content">
-        <h1>😊 Emoji Match - Your Qualities 😊</h1>
+        <h1>Emoji Match - Your Qualities</h1>
         <p className="round-info">Round {score}/3</p>
 
         <div className="emoji-grid">
@@ -86,20 +89,27 @@ export default function Game3() {
         {gameComplete && (
           <div className="complete-modal">
             <div className="complete-content">
-              <h2>🌟 Amazing! 🌟</h2>
+              <h2>Amazing!</h2>
               <p>You've revealed all your beautiful qualities!</p>
               <p className="qualities-list">
-                ✨ You are <br/>
-                Beautiful, Strong, Creative, Energetic, Graceful, and a Star! ✨
+                You are <br />
+                Beautiful, Strong, Creative, Energetic, Graceful, and a Star!
               </p>
-              <button onClick={initializeGame} className="restart-btn">Play Again</button>
-              <Link to="/" className="home-btn-link">Back to Home</Link>
+              <button onClick={initializeGame} className="restart-btn">
+                Play Again
+              </button>
+              <Link to="/" className="home-btn-link">
+                Back to Home
+              </Link>
             </div>
           </div>
         )}
 
-        <button onClick={initializeGame} className="reset-game-btn">New Game</button>
+        <button onClick={initializeGame} className="reset-game-btn">
+          New Game
+        </button>
       </div>
     </div>
   )
 }
+
