@@ -12,37 +12,32 @@ interface Wish {
 const wishes: Wish[] = [
   {
     id: 1,
-    tamil:
-      'ஷாருமதி, சீமை நாள் உன் வாழ்க்கையில் வந்த நாளிலிருந்து, தினமும் ஒரு பிறந்தநாள் போலவே இருக்கும். உன் புன்னகை, உன் அன்பு என்னை வாழ வைக்கிறது.',
+    tamil: '',
     english:
-      'Shaarumathi, since the day you came into my life, every day feels like a birthday. Your smile, your love makes me live.',
+      'Sarumathi, since the day you came into my life, every day feels like a birthday. Your smile, your love makes me live.',
   },
   {
     id: 2,
-    tamil:
-      'நீ உன் அழகான ஆன்மா. நீ என் வாழ்க்கையின் ஒளி. எப்போதும் சந்தோஷமாகவும் வெற்றியாகவும் இரு.',
+    tamil: '',
     english:
       'You are a beautiful soul. You are the light of my life. Be happy and succeed always.',
   },
   {
     id: 3,
-    tamil:
-      'உன் காதல் எனக்கு ஆற்றல் தருகிறது. நீ எப்போதும் என் பக்கத்தில்தான் இருக்கிறாய். முழுமையாக சந்தோஷமாய் இரு.',
+    tamil: '',
     english: 'Your love sustains me. You are always by my side. Be completely happy.',
   },
   {
     id: 4,
-    tamil:
-      'உன் சிரிப்பு என் சோர்வை போக்குகிறது. உன் நம்பிக்கை என்னை இன்னும் நல்லவனாக்கிறது. என்றும் உன் வாழ்வு ஆசீர்வதிக்கப்படும்.',
+    tamil: '',
     english:
       'Your laughter takes away all my tiredness. Your trust makes me better. May the universe bless you forever.',
   },
   {
     id: 5,
-    tamil:
-      'என் அன்பே ஷாருமதி, உன் பிறப்பால் உலகம் ஒரு அருமையான மனிதனை பெற்றது. உன் வாழ்வில் எப்போதும் மகிழ்ச்சி நிறைந்திருக்கட்டும்.',
+    tamil: '',
     english:
-      'My dear Shaarumathi, by your birth, the world received a wonderful woman. May your life be filled with joy forever!',
+      'My dear Sarumathi, by your birth, the world received a wonderful woman. May your life be filled with joy forever!',
   },
 ]
 
@@ -96,8 +91,8 @@ export default function WishesApp() {
 
   const [quoteHighlightTick, setQuoteHighlightTick] = useState(0)
 
-  const welcomeQuoteWords = ['ஷாரு', 'அன்பு', 'காதல்', 'மனம்', 'வாழ்த்து', 'ஒளி']
-  const finalQuoteWords = ['அன்பு', 'மனம்', 'வாழ்வு', 'காதல்', 'சந்தோஷம்', 'என்றும்', 'நம்மிடம்', 'நன்றி']
+  const welcomeQuoteWords = ['Saru', 'Love', 'Love', 'Mind', 'Wishes', 'Light']
+  const finalQuoteWords = ['Love', 'Mind', 'Life', 'Love', 'Happiness', 'Always', 'With Us', 'Thanks']
 
   useEffect(() => {
     if (stage === 'welcome') {
@@ -118,6 +113,20 @@ export default function WishesApp() {
         650
       )
       return () => clearInterval(t)
+    }
+  }, [stage])
+
+  useEffect(() => {
+    if (stage === 'final') {
+      const timer = setTimeout(() => {
+        setCurrentWish(0)
+        setStage('login')
+        setShowCrackers(false)
+        setAutoPlayStarted(false)
+        autoPlayRef.current = false
+        setDob('')
+      }, 30000) // 30 seconds
+      return () => clearTimeout(timer)
     }
   }, [stage])
 
@@ -217,7 +226,6 @@ export default function WishesApp() {
         <div className="login-glow"></div>
         <div className="login-card">
           <div className="login-header">
-            <div className="logo-circle">[LOGO]</div>
             <div>
               <h1 className="login-title">Sarumathi Birthday</h1>
               <p className="login-subtitle">May 10, 2002</p>
@@ -271,7 +279,7 @@ export default function WishesApp() {
 
           <div className="welcome-message">
             <p className="main-wish">
-              Shaarumathi, every day feels special from the day you entered my life.
+              Sarumathi, every day feels special from the day you entered my life.
             </p>
             <p className="sub-wish">May you have many more happy returns of the day!</p>
           </div>
@@ -295,7 +303,7 @@ export default function WishesApp() {
     return (
       <div className="wishes-container">
         <div className="wish-card">
-          <h1 className="name-title">Shaarumathi</h1>
+          <h1 className="name-title">Sarumathi</h1>
           <p className="page-indicator">
             Wish {currentWish + 1} / {wishes.length}
           </p>
@@ -334,8 +342,32 @@ export default function WishesApp() {
   if (stage === 'cake') {
     return (
       <div className="cake-container">
+        {isCuttingCake && (
+          <>
+            <div className="crackers-container">
+              {[...Array(50)].map((_, i) => (
+                <div key={i} className="cracker" style={{ '--cracker-index': i } as any}>
+                  
+                </div>
+              ))}
+              {[...Array(40)].map((_, i) => (
+                <div key={`star-${i}`} className="cracker star" style={{ '--cracker-index': i } as any}>
+                  
+                </div>
+              ))}
+            </div>
+
+            <div className="happy-birthday-text">
+              {['H', 'A', 'P', 'P', 'Y', ' ', 'B', 'I', 'R', 'T', 'H', 'D', 'A', 'Y'].map((char, idx) => (
+                <div key={idx} className="birthday-word">
+                  {char}
+                </div>
+              ))}
+            </div>
+          </>
+        )}
         <div className="cake-3d-wrapper">
-          <h1 className="cake-top-title">Happy Birthday Charuu..</h1>
+          <h1 className="cake-top-title">Happy Birthday Sarumathi..</h1>
 
           <div className="cake-3d">
             <div className="cake-layer layer-1"></div>
@@ -376,14 +408,14 @@ export default function WishesApp() {
       {showCrackers && (
         <>
           <div className="crackers-container">
-            {[...Array(25)].map((_, i) => (
+            {[...Array(50)].map((_, i) => (
               <div key={i} className="cracker" style={{ '--cracker-index': i } as any}>
-                [CRACK]
+                
               </div>
             ))}
-            {[...Array(20)].map((_, i) => (
+            {[...Array(40)].map((_, i) => (
               <div key={`star-${i}`} className="cracker star" style={{ '--cracker-index': i } as any}>
-                [STAR]
+                
               </div>
             ))}
           </div>
@@ -395,18 +427,26 @@ export default function WishesApp() {
               </div>
             ))}
           </div>
+
+          <div className="fireworks-container">
+            {[...Array(10)].map((_, i) => (
+              <div key={i} className="firework" style={{ '--firework-index': i } as any}>
+                
+              </div>
+            ))}
+          </div>
         </>
       )}
 
       <div className="final-content">
-        <h1 className="sarumathi-name">Shaarumathi</h1>
+        <h1 className="sarumathi-name">Sarumathi</h1>
 
         <div className="final-message">
-          <h2>Happy birthday Saru,</h2>
+          <h2>Happy Birthday Charuu..</h2>
           <p>
             May your life be filled with joy and happiness. Wishing you all the best always.
           </p>
-          <p className="signature">[SIGN] Shaarumathi</p>
+          <p className="signature">Sarumathi</p>
         </div>
 
         <button
