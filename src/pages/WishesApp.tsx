@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import './WishesApp.css'
 
-const remoMusicUrl = new URL('../Assets/Music/RemoMusic.mp4', import.meta.url).href
+const remoMusicUrl = '/RemoMusic.mp4'
 
 interface Wish {
   id: number
